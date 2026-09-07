@@ -1,0 +1,70 @@
+Viewed index.html:1-150
+Viewed index.html:151-286
+Viewed app.js:1-100
+Viewed thermometer.js:1-60
+
+Here is the comprehensive feature breakdown of **THERMO.NEON**:
+
+---
+
+### 🌡️ 1. Multi-Scale Thermal Conversion
+* **5 Supported Temperature Scales:**
+  * **Celsius (°C)** — Metric standard scale
+  * **Fahrenheit (°F)** — Imperial / US customary scale
+  * **Kelvin (K)** — SI thermodynamic absolute scale
+  * **Rankine (°R)** — Absolute thermodynamic Fahrenheit scale
+  * **Réaumur (°Ré)** — Historic octogesimal scale
+* **Bidirectional Unit Swapping:** Instant unit inversion with a single click (`Swap Units`).
+* **Synchronous Multi-Scale Spectrum Matrix:** Displays all 5 temperature values simultaneously in real-time cards as you type or scrub.
+* **Step-by-Step Formula Breakdown:** Dynamically shows mathematical formulas, substituted variables, and step-by-step arithmetic (e.g. `(25°C × 9/5) + 32 = 77.00°F`).
+
+---
+
+### 🎨 2. Futuristic Cyberpunk Visualizer & UI
+* **Dynamic Ambient Canvas Particles:**
+  * Cold temperatures produce slow, crystalline cyan/blue snowflakes.
+  * Room/pleasant temperatures produce gentle floating energy motes.
+  * High temperatures spawn fast-rising solar embers and fiery spark particles.
+* **Vertical Mercury Glass Thermometer:**
+  * Animated liquid level with glass reflection and bulb glow that adjusts dynamically based on the current temperature.
+* **Circular Radial Thermal Flux Gauge:**
+  * SVG-based circular arc with real-time percentage fill and pulsating glow.
+* **Real-time Thermal Sensation Chips:**
+  * Dynamic badges classifying the temperature (e.g., *Absolute Cryogenic, Freezing Cold, Room Temp / Pleasant, Hot, Extreme Combustion*).
+* **5 Neon Palette Themes:**
+  * Cyber Cyan, Neon Magenta, Acid Emerald, Solar Amber, and UV Violet.
+
+---
+
+### 🔊 3. Web Audio Synthesizer Feedback
+* **Dynamic Frequency Pitch Modulation:** Temperature changes dynamically modulate audio oscillator pitch (colder = deeper sub-bass hum, hotter = high-frequency sizzle).
+* **Sound FX for Actions:** Audio cues for unit switches, swap animations, preset clicks, and copy events.
+* **Synthesizer Dock:** Volume slider and quick mute toggle button with local state retention.
+
+---
+
+### ⚡ 4. Productivity & Usability Controls
+* **Real-World Thermal Benchmarks (Presets):** Quick single-click shortcuts for standard reference points:
+  * *Absolute Zero (-273.15°C)*
+  * *Liquid Nitrogen (-195.79°C)*
+  * *Dry Ice (-78.5°C)*
+  * *Water Freezing (0°C)*
+  * *Room Temperature (21°C)*
+  * *Human Body (37°C)*
+  * *Water Boiling (100°C)*
+  * *Oven Baking (180°C)*
+  * *Sun Surface (5,505°C)*
+* **Precision Pill Selector:** Switch between `.0`, `.1`, `.2`, and `.4` decimal places instantly.
+* **Interactive Thermal Scrubber Slider:** Continuous range dragging with adaptive min/max bounds based on the active unit.
+* **Stepper Controls:** Increment/decrement buttons (with `Shift + Click` for ±10 steps).
+* **One-Click Copy & Toast HUD:** Copy results directly to the clipboard with visual floating toast notifications.
+* **Conversion History Log:** Saves recent conversions with persistent memory and a clear-all feature.
+
+---
+
+### 💡 Potential Enhancements (If you'd like to expand)
+1. **Weather API Integration:** Fetch real-time city temperatures directly into the converter.
+2. **Keyboard Shortcuts:** Quick hotkeys (e.g., `S` to swap, `C`/`F`/`K` to switch units, `Space` for audio toggle).
+3. **Graphing / Thermal Ramp Simulator:** Visual chart of temperature transitions over time.
+
+Would you like to customize, tweak, or add any new features to the project?
