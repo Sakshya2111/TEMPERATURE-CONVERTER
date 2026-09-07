@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyan">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON PULSE // Advanced Dark-Theme Temperature Converter</title>
+    <meta name="description" content="Futuristic dark-theme neon temperature converter with real-time audio synthesizer feedback, interactive mercury thermometer visualizer, and multi-unit conversions.">
+    <meta name="theme-color" content="#05070e">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Canvas for Ambient Neon Particles & Thermal Effects -->
+    <canvas id="ambientCanvas"></canvas>
+
+    <div class="app-wrapper">
+        <!-- HEADER HUD -->
+        <header class="app-header">
+            <div class="logo-block">
+                <div class="logo-icon-neon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>THERMO.NEON</h1>
+                    <span class="logo-tagline">Precision Thermal Matrix &bull; Sound Synthesis</span>
+                </div>
+            </div>
+
+            <div class="header-controls">
+                <!-- Palette Theme Picker -->
+                <div class="theme-selector-group">
+                    <span class="theme-label">Palette</span>
+                    <button class="theme-pill" data-theme="cyan" data-theme-name="Cyber Cyan" title="Cyber Cyan"></button>
+                    <button class="theme-pill" data-theme="magenta" data-theme-name="Neon Magenta" title="Neon Magenta"></button>
+                    <button class="theme-pill" data-theme="emerald" data-theme-name="Acid Emerald" title="Acid Emerald"></button>
+                    <button class="theme-pill" data-theme="amber" data-theme-name="Solar Amber" title="Solar Amber"></button>
+                    <button class="theme-pill" data-theme="violet" data-theme-name="UV Violet" title="UV Violet"></button>
+                </div>
+
+                <!-- Web Audio Synthesizer Controls -->
+                <div class="audio-dock">
+                    <button id="muteToggleBtn" class="audio-btn" title="Toggle Synthesizer Audio" aria-label="Toggle Sound">
+                        <svg id="volumeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                    </button>
+                    <input type="range" id="volumeSlider" class="volume-slider-bar" min="0" max="100" value="60" title="Audio Volume">
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONVERTER & VISUALIZER ROW -->
+        <main class="dashboard-grid">
+            <!-- PRIMARY CONVERTER PANEL -->
+            <section class="neon-panel converter-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                        Thermal Transformation
+                    </h2>
+                    <div class="precision-row">
+                        <div class="precision-pills">
+                            <button class="precision-btn" data-precision="0" title="0 Decimals">.0</button>
+                            <button class="precision-btn" data-precision="1" title="1 Decimal">.1</button>
+                            <button class="precision-btn active" data-precision="2" title="2 Decimals">.2</button>
+                            <button class="precision-btn" data-precision="4" title="4 Decimals">.4</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="converter-body">
+                    <!-- Unit Selectors Row -->
+                    <div class="input-group-grid">
+                        <div class="unit-field-wrapper">
+                            <label for="fromUnitSelect" class="field-label">Convert From</label>
+                            <div class="custom-select-box">
+                                <select id="fromUnitSelect" class="neon-select">
+                                    <option value="celsius" selected>Celsius (°C)</option>
+                                    <option value="fahrenheit">Fahrenheit (°F)</option>
+                                    <option value="kelvin">Kelvin (K)</option>
+                                    <option value="rankine">Rankine (°R)</option>
+                                    <option value="reaumur">Réaumur (°Ré)</option>
+                                </select>
+                                <div class="select-arrow">▼</div>
+                            </div>
+                        </div>
+
+                        <div class="swap-btn-container">
+                            <button id="swapBtn" class="swap-btn" title="Swap Units (Reverse Conversion)" aria-label="Swap Units">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 16V4m0 0L3 8m4-4l4 4m6 4v12m0 0l4-4m-4 4l-4-4"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="unit-field-wrapper">
+                            <label for="toUnitSelect" class="field-label">Convert To</label>
+                            <div class="custom-select-box">
+                                <select id="toUnitSelect" class="neon-select">
+                                    <option value="celsius">Celsius (°C)</option>
+                                    <option value="fahrenheit" selected>Fahrenheit (°F)</option>
+                                    <option value="kelvin">Kelvin (K)</option>
+                                    <option value="rankine">Rankine (°R)</option>
+                                    <option value="reaumur">Réaumur (°Ré)</option>
+                                </select>
+                                <div class="select-arrow">▼</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Numerical Input Card -->
+                    <div class="input-digit-container">
+                        <div class="digit-input-wrapper">
+                            <input type="number" id="tempInput" class="neon-number-input" value="25" step="any" placeholder="0" aria-label="Temperature Input">
+                        </div>
+                        <div class="input-stepper-controls">
+                            <button id="stepUpBtn" class="stepper-btn" title="Increase Temperature (+1, Shift+Click for +10)">▲</button>
+                            <button id="stepDownBtn" class="stepper-btn" title="Decrease Temperature (-1, Shift+Click for -10)">▼</button>
+                        </div>
+                    </div>
+
+                    <!-- Cyber Range Slider -->
+                    <div class="slider-container">
+                        <div class="slider-scale-labels">
+                            <span id="sliderMinLabel">-50 °C</span>
+                            <span>INTERACTIVE THERMAL SCRUBBER</span>
+                            <span id="sliderMaxLabel">150 °C</span>
+                        </div>
+                        <input type="range" id="tempSlider" class="cyber-range-slider" min="-50" max="150" step="0.5" value="25">
+                    </div>
+
+                    <!-- Hero Output Display Card -->
+                    <div class="primary-result-hero">
+                        <div class="hero-readout-col">
+                            <div class="hero-value-line">
+                                <span id="resultValue" class="hero-big-number">77.00</span>
+                                <span id="resultUnit" class="hero-big-unit">°F</span>
+                            </div>
+                            <span id="resultDesc" class="hero-desc">Fahrenheit (Imperial / US customary scale)</span>
+                        </div>
+                        <button id="copyResultBtn" class="copy-result-btn" title="Copy Output to Clipboard">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <span>Copy Result</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INTERACTIVE NEON THERMOMETER & GAUGE VISUALIZER -->
+            <section class="neon-panel visualizer-card">
+                <div class="panel-header" style="width: 100%;">
+                    <h2 class="panel-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                        </svg>
+                        Atmospheric Visualizer
+                    </h2>
+                </div>
+
+                <div class="visualizer-body">
+                    <!-- Vertical Neon Tube Thermometer -->
+                    <div class="thermometer-tube-container">
+                        <div class="thermometer-graduations">
+                            <div class="grad-mark">150°</div>
+                            <div class="grad-mark">100°</div>
+                            <div class="grad-mark">50°</div>
+                            <div class="grad-mark">0°</div>
+                            <div class="grad-mark">-50°</div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div class="thermometer-glass-stem">
+                                <div id="tubeMercury" class="mercury-fill"></div>
+                            </div>
+                            <div id="tubeBulb" class="thermometer-bulb"></div>
+                        </div>
+                    </div>
+
+                    <!-- Circular Radial Gauge -->
+                    <div class="radial-gauge-widget">
+                        <svg class="gauge-svg" viewBox="0 0 100 100">
+                            <circle class="gauge-bg" cx="50" cy="50" r="45"></circle>
+                            <circle id="gaugeArc" class="gauge-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div class="gauge-center-content">
+                            <span class="gauge-center-icon">⚡</span>
+                            <span class="gauge-center-title">THERMAL FLUX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Temperature State / Sensation Chip -->
+                <div class="sensation-badge-wrapper">
+                    <span id="gaugeStateText" class="sensation-badge state-pleasant">
+                        🌿 Comfortable / Room Temp
+                    </span>
+                </div>
+            </section>
+        </main>
+
+        <!-- REAL-TIME MULTI-UNIT CONVERSION MATRIX -->
+        <section class="matrix-section">
+            <h2 class="panel-title" style="margin-left: 6px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                Synchronous Multi-Scale Spectrum
+            </h2>
+            <div id="unitMatrixGrid" class="matrix-grid">
+                <!-- Dynamically populated 5 unit cards -->
+            </div>
+        </section>
+
+        <!-- BOTTOM INFORMATION & LOGS GRID -->
+        <div class="bottom-info-grid">
+            <!-- STEP-BY-STEP FORMULA BREAKDOWN -->
+            <section class="neon-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                        Formula Breakdown
+                    </h2>
+                </div>
+                <div id="formulaBreakdown" class="formula-content">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+            <!-- REAL-WORLD PRESETS -->
+            <section class="neon-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Thermal Benchmarks
+                    </h2>
+                </div>
+                <div id="presetsGrid" class="presets-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+            <!-- CONVERSION HISTORY LOG -->
+            <section class="neon-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                        </svg>
+                        Recent Activity
+                    </h2>
+                    <button id="clearHistoryBtn" class="clear-btn">Clear</button>
+                </div>
+                <div id="historyList" class="history-list-box">
+                    <div class="history-empty">No recent conversions.</div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Floating Neon Toast Notification -->
+    <div id="neonToast" class="neon-toast" role="status" aria-live="polite"></div>
+
+    <!-- Scripts -->
+    <script src="audio.js"></script>
+    <script src="thermometer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
